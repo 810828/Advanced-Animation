@@ -45,7 +45,7 @@ Ball.prototype.update = function () {
 Ball.prototype.bounce = function () {
   if (this.loc.x >= canvas.width) this.vel.x = -this.vel.x;
   if (this.loc.x <= 0) this.vel.x = -this.vel.x;
-  if (this.loc.y >= canvas.height) this.vel.y = -this.vel.y + 0.5;
+  if (this.loc.y >= canvas.height) this.vel.y = -this.vel.y ;
   if (this.loc.y <= 0) this.vel.y = -this.vel.y;
 };
 
