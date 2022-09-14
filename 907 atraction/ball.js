@@ -6,8 +6,6 @@ function Ball(x, y, d) {
   this.vel = new JSVector(dx, dy); // add a velocity vector
   this.acc = new JSVector(0, 0.1); //  add an acceleration vector
   this.diam = d;
-  this.dist = this.loc.distance(mover.loc);
-  console.log(this.dist);
 
   //  choose a random color from this array
   this.clrArray = [
@@ -40,8 +38,15 @@ Ball.prototype.render = function () {
 };
 
 Ball.prototype.update = function () {
-  // this.vel.add(this.acc);
-  // this.loc.add(this.vel);
+  this.vel.add(this.acc);
+  this.loc.add(this.vel);
+
+  this.dist = this.loc.distance(mover.loc);
+  // if (this.dist.normalize() >= 500) {
+  //   this.dist = this.dist - 10.5;
+  // }
+
+  console.log(this.dist.normalize);
 };
 
 Ball.prototype.bounce = function () {

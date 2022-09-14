@@ -11,14 +11,15 @@ function JSVector(x = 0, y = 0) {
 JSVector.prototype.setMagnitude = function (mag) {
   let angle = this.getDirection();
   this.x = mag * Math.cos(mag);
-  this.y = mag * Math.sin(mag)
+  this.y = mag * Math.sin(mag);
   return this;
 };
 
 // Return the magnitude of the vector using pythagorean theorem
 JSVector.prototype.getMagnitude = function () {
-  mag = Math.sqrt(this.x * this.x + this.y * this.y);
-  return mag;
+  // mag = Math.sqrt(this.x * this.x + this.y * this.y);
+  dir = Math.atan2(this.y, this.x);
+  return dir;
 };
 
 // Set the angle (direction) of the vector,
@@ -52,14 +53,14 @@ JSVector.prototype.sub = function (v2) {
 
 // Class method to return a new vector that is the sum of two vectors
 JSVector.addGetNew = function (v1, v2) {
-  let v3 = new JSVector(v1.x + v2.x,  v1.y + v2.y);
+  let v3 = new JSVector(v1.x + v2.x, v1.y + v2.y);
   return v3;
 };
 
 // Class method to return a new vector that is the difference of two vectors
 JSVector.subGetNew = function (v1, v2) {
-  let v3 = new JSVector(v1.x - v2.x,  v1.y - v2.y);
-return v3;
+  let v3 = new JSVector(v1.x - v2.x, v1.y - v2.y);
+  return v3;
 };
 
 // Multiply this vector by a scalar
@@ -84,9 +85,9 @@ JSVector.prototype.normalize = function () {
 
 // Limit the magnitude of this vector
 JSVector.prototype.limit = function (lim) {
- if(this.getMagnitude() > lim) {
-  this.setMagnitude(lim);
- }
+  if (this.getMagnitude() > lim) {
+    this.setMagnitude(lim);
+  }
   return this;
 };
 
@@ -126,6 +127,6 @@ JSVector.prototype.copy = function () {
 JSVector.prototype.toString = function () {
   // let str = "x = " + this.x + " y = " + this.y + " direction = " + this.getDirection();
   // str += " Magntitude = " + this.getMagnitude();
-  let str = "x = " + this.x 
+  let str = "x = " + this.x;
   return str;
 };
