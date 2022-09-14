@@ -1,9 +1,12 @@
 function Mover(x, y, d) {
   this.loc = new JSVector(x, y);
-  this.d = d;
+  let dx = Math.random() * 4 - 3;
+  let dy = Math.random() * 4 - 3;
+  // this.vel = new JSVector(dx, dy); // add a velocity vector  this.d = d;
 
   Mover.prototype.run = function () {
     this.render();
+    this.update();
   };
 
   Mover.prototype.render = function () {
@@ -13,5 +16,9 @@ function Mover(x, y, d) {
     context.fillStyle = this.clr; // color to stroke
     context.fill(); // render the fill
     context.stroke(); // render the stroke
+  };
+
+  Mover.prototype.update = function () {
+    this.loc.add(this.vel);
   };
 }
