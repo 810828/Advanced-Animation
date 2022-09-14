@@ -34,7 +34,7 @@ JSVector.prototype.setDirection = function (angle) {
 // Return the direction (angle) of the vector
 JSVector.prototype.getDirection = function () {
   dir = Math.atan2(this.y, this.x);
-  return this;
+  return dir;
 };
 
 // Add another vector to this vector
@@ -125,8 +125,9 @@ JSVector.prototype.copy = function () {
 
 // Override inherited toString() to return a description of this instance
 JSVector.prototype.toString = function () {
-  // let str = "x = " + this.x + " y = " + this.y + " direction = " + this.getDirection();
-  // str += " Magntitude = " + this.getMagnitude();
-  let str = "x = " + this.x;
+  let str =
+    "x = " + this.x + " y = " + this.y + " direction = " + this.getDirection();
+  str += " Magntitude = " + this.getMagnitude();
+  // let str = "x = " + this.x;
   return str;
 };
