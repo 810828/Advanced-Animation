@@ -17,9 +17,9 @@ JSVector.prototype.setMagnitude = function (mag) {
 
 // Return the magnitude of the vector using pythagorean theorem
 JSVector.prototype.getMagnitude = function () {
-  // mag = Math.sqrt(this.x * this.x + this.y * this.y);
-  dir = Math.atan2(this.y, this.x);
-  return dir;
+  mag = Math.sqrt(this.x * this.x + this.y * this.y);
+  // dir = Math.atan2(this.y, this.x);
+  return mag;
 };
 
 // Set the angle (direction) of the vector,
