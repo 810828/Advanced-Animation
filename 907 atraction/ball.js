@@ -38,12 +38,13 @@ Ball.prototype.render = function () {
 };
 
 Ball.prototype.update = function () {
-  this.acc = JSVector.subGetNew(mover.loc, this.loc);
+  this.acc = JSVector.subGetNew( mover.loc,this.loc);
   this.acc.normalize();
   this.acc.multiply(0.25);
   this.vel.add(this.acc);
-  this.loc.add(this.vel);
   this.vel.limit(2);
+  this.loc.add(this.vel);
+  
 };
 
 Ball.prototype.bounce = function () {
