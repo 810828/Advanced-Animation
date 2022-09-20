@@ -42,9 +42,8 @@ Ball.prototype.update = function () {
   this.acc.normalize();
   this.acc.multiply(0.25);
   this.vel.add(this.acc);
-
   this.loc.add(this.vel);
-  console.log();
+  this.vel.limit(2);
 };
 
 Ball.prototype.bounce = function () {
