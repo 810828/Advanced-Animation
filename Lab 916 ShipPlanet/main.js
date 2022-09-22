@@ -31,6 +31,7 @@ planet.run = function () {
   planet.render();
   planet.update();
   planet.checkShip();
+  planet.checkSides();
 };
 
 planet.render = function () {
@@ -44,14 +45,22 @@ planet.render = function () {
 
 planet.update = function () {
   this.vel.add(this.acc);
+  this.vel.limit(5);
   this.loc.add(this.vel);
 };
 planet.checkShip = function () {
   if (planet.loc.distance(ship.loc) < 100) {
-    ship.vel.limit(4);
+    ship.vel.limit(2);
     planet.vel.add(ship.vel);
     console.log("im here");
   }
+};
+
+planet.checkSides = function () {
+  if (planet.loc.x > canvas.width) planet.loc.x = 0;
+  if (planet.loc.x < 0) planet.loc.x = canvas.width;
+  if (planet.loc.y > canvas.height) planet.loc.y = 0;
+  if (planet.loc.y < 0) planet.loc.y = canvas.height;
 };
 //!+++++++++++++++++++++++++++++++++ end of planet
 
@@ -67,6 +76,7 @@ ship.acc = new JSVector(0, 0);
 ship.run = function () {
   ship.render();
   ship.update();
+  ship.checkSides();
 };
 ship.render = function () {
   context.beginPath();
@@ -81,8 +91,16 @@ ship.render = function () {
 ship.update = function () {
   ship.acc = new JSVector.subGetNew(planet.loc, ship.loc);
   ship.acc.normalize();
-  ship.acc.multiply(0.05);
+  ship.acc.multiply(0.1);
   ship.vel.add(ship.acc);
+  ship.vel.limit(3);
   ship.loc.add(ship.vel);
+};
+
+ship.checkSides = function () {
+  if (ship.loc.x > canvas.width) ship.vel.x = -ship.vel.x;
+  if (ship.loc.x < 0) ship.vel.x = -ship.vel.x;
+  if (ship.loc.y > canvas.height) ship.vel.y = -ship.vel.y;
+  if (ship.loc.y < 0) ship.vel.y = -ship.vel.y;
 };
 //?+++++++++++++++++++++++++++++++++++ end of ship
