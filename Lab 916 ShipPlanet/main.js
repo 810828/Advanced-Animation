@@ -35,12 +35,14 @@ planet.run = function () {
 };
 
 planet.render = function () {
+  // context.save();
   context.beginPath(); // clear old path
   context.arc(this.loc.x, this.loc.y, this.d, 0, 2 * Math.PI); //  change x and y to this.loc.x and this.loc.y
   context.strokeStyle = "black"; // color to fill
   context.fillStyle = "red"; // color to stroke
   context.fill(); // render the fill
   context.stroke(); // render the stroke
+  // context.restore();
 };
 
 planet.update = function () {
@@ -67,7 +69,7 @@ planet.checkSides = function () {
 //?+++++++++++++++++++++++++++++++++++   ship
 ship = {};
 
-ship.loc = new JSVector(100, 100);
+ship.loc = new JSVector(00, 00);
 let dx = Math.random() * 4 - 3;
 let dy = Math.random() * 4 - 3;
 ship.vel = new JSVector(dx, dy);
@@ -79,14 +81,18 @@ ship.run = function () {
   ship.checkSides();
 };
 ship.render = function () {
+  context.save();
   context.beginPath();
   context.moveTo(ship.loc.x, ship.loc.y);
   context.lineTo(ship.loc.x, ship.loc.y + 20);
   context.stroke();
+
   context.beginPath();
   context.moveTo(ship.loc.x - 5, ship.loc.y);
   context.lineTo(ship.loc.x + 5, ship.loc.y);
   context.stroke();
+  context.restore;
+  // context.rotate(90);
 };
 ship.update = function () {
   ship.acc = new JSVector.subGetNew(planet.loc, ship.loc);
@@ -94,7 +100,7 @@ ship.update = function () {
   ship.acc.multiply(0.1);
   ship.vel.add(ship.acc);
   ship.vel.limit(3);
-  ship.loc.add(ship.vel);
+  // ship.loc.add(ship.vel);
 };
 
 ship.checkSides = function () {
