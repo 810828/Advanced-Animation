@@ -69,7 +69,7 @@ planet.checkSides = function () {
 //?+++++++++++++++++++++++++++++++++++   ship
 ship = {};
 
-ship.loc = new JSVector(00, 00);
+ship.loc = new JSVector(100, 100);
 let dx = Math.random() * 4 - 3;
 let dy = Math.random() * 4 - 3;
 ship.vel = new JSVector(dx, dy);
@@ -83,16 +83,16 @@ ship.run = function () {
 ship.render = function () {
   context.save();
   context.beginPath();
-  context.moveTo(ship.loc.x, ship.loc.y);
-  context.lineTo(ship.loc.x, ship.loc.y + 20);
+  context.translate(this.loc.x, this.loc.y);
+  // context.moveTo(ship.loc.x, ship.loc.y);
+  context.lineTo(20, 0);
+  context.lineTo(-10, 10);
+  context.lineTo(0, -5);
+  // context.lineTo(20);
   context.stroke();
+  context.closepath();
 
-  context.beginPath();
-  context.moveTo(ship.loc.x - 5, ship.loc.y);
-  context.lineTo(ship.loc.x + 5, ship.loc.y);
-  context.stroke();
-  context.restore;
-  // context.rotate(90);
+  context.restore();
 };
 ship.update = function () {
   ship.acc = new JSVector.subGetNew(planet.loc, ship.loc);
