@@ -3,8 +3,8 @@ window.addEventListener("load", init);
 
 // global variables
 var canvas, context, x, y, dx, dy;
-var planet;
-var orbitter = [];
+var planet = [];
+var p_number = 3;
 
 function init() {
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement
@@ -13,6 +13,9 @@ function init() {
   context = canvas.getContext("2d");
   x = y = 100; // initial x,y canvas location
   dx = dy = 2; // velocity in x and y directions
+  for (let i = 0; i < p_number; i++) {
+    planet[i] = new Planet(100, 100, 10);
+  }
   animate(); // kick off the animation
 }
 
@@ -22,6 +25,10 @@ function animate() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   update(); // update location
   draw(); // render
+  for (let i = 0; i < planet.length; i++) {
+    planet[i].run();
+  }
+  // planet.run();
   requestAnimationFrame(animate); // next cycle
 }
 
@@ -33,13 +40,13 @@ function update() {
 
 // render a circle
 function draw() {
-  let radius = 15; // local variable radius of the circle
-  // create the circle path
-  context.beginPath(); // clear old path
-  // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
-  context.arc(x, y, radius, 0, 2 * Math.PI);
-  context.strokeStyle = "black"; // color to fill
-  context.fillStyle = "blue"; // color to stroke
-  context.fill(); // render the fill
-  context.stroke(); // render the stroke
+  // let radius = 15; // local variable radius of the circle
+  // // create the circle path
+  // context.beginPath(); // clear old path
+  // // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+  // context.arc(x, y, radius, 0, 2 * Math.PI);
+  // context.strokeStyle = "black"; // color to fill
+  // context.fillStyle = "blue"; // color to stroke
+  // context.fill(); // render the fill
+  // context.stroke(); // render the stroke
 }
