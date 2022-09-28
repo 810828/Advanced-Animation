@@ -14,7 +14,7 @@ function init() {
   x = y = 100; // initial x,y canvas location
   dx = dy = 2; // velocity in x and y directions
   for (let i = 0; i < p_number; i++) {
-    planet[i] = new Planet(100, 100, 10);
+    planet[i] = new Planet(Math.random() * 500, Math.random() * 500, 10);
   }
   animate(); // kick off the animation
 }
