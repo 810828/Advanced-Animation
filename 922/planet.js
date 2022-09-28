@@ -1,6 +1,6 @@
 function Planet(x, y, d) {
   this.loc = new JSVector(x, y);
-  this.vel = new JSVector(1.5, 1.5);
+  this.vel = new JSVector(1, 0);
   this.d = d;
   this.orb = [];
   this.o_number = 1;
@@ -39,7 +39,7 @@ Planet.prototype.update = function () {
 
 Planet.prototype.makeOrbitters = function () {
   for (let i = 0; i < this.orb.length; i++) {
-    this.orb[i].run();
+    this.orb[i].run(this.loc.x, this.loc.y);
   }
 };
 
