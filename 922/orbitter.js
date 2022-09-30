@@ -1,7 +1,8 @@
-function Orbitter(x, y, d) {
+function Orbitter( x, y, d) {
   this.vel = new JSVector(0, 0);
   this.d = d;
   this.angle = 0;
+ this.angleVelocity = 0.1;
   // this.orbRad = 50;
 }
 
@@ -13,8 +14,7 @@ Orbitter.prototype.run = function (x, y) {
 Orbitter.prototype.render = function (x, y) {
   this.p_loc = new JSVector(x, y);
   this.loc = new JSVector(x, y);
-  this.angle = this.angle + 0.1;
-  // console.log(this.angle);
+  this.angle += this.angleVelocity;
 
   // create the circle path
   context.save();

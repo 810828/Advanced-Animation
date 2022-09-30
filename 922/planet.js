@@ -3,7 +3,7 @@ function Planet(x, y, d) {
   this.vel = new JSVector(Math.random() * 4 - 4, Math.random() * 4 - 4);
   this.d = d;
   this.orb = [];
-  this.o_number = 1;
+  this.o_number = 3;
 
   for (let i = 0; i < this.o_number; i++) {
     // loads a new orbitter
@@ -14,21 +14,29 @@ function Planet(x, y, d) {
 Planet.prototype.run = function () {
   this.render();
   this.update();
-  this.makeOrbitters();
+  //this.makeOrbitters();
   this.checkEdges();
 };
 
 Planet.prototype.render = function () {
-  context.beginPath();
-  context.lineTo(this.loc.x, this.loc.y - 15);
-  context.lineTo(this.loc.x + 10, this.loc.y + 10);
+  let ctx = context;
 
-  context.lineTo(this.loc.x, this.loc.y - 15);
-  context.lineTo(this.loc.x - 10, this.loc.y + 10);
+  ctx.save();
+  ctx.translate(this.loc.x, this.loc.y);
+  ctx.rotate(-Math.PI/2);
+  ctx.beginPath();
+  ctx.moveTo(8, 0); // Begin first sub-path
+  ctx.lineTo(-5, -5);
+  ctx.lineTo(-5, 5);
+  ctx.closePath()
+  ctx.stroke();
 
-  context.lineTo(this.loc.x - 10, this.loc.y + 10);
-  context.lineTo(this.loc.x + 10, this.loc.y + 10);
-  context.stroke();
+  //+++++++++++++++++++++++++++++++++++++++++++++
+  for(let i = 0; i < this.orbs, i++){
+    
+  }
+
+  ctx.restore();
 
   //   context.closePath();
 };
@@ -37,11 +45,11 @@ Planet.prototype.update = function () {
   this.loc.add(this.vel);
 };
 
-Planet.prototype.makeOrbitters = function () {
-  for (let i = 0; i < this.orb.length; i++) {
-    this.orb[i].run(this.loc.x, this.loc.y);
-  }
-};
+// Planet.prototype.makeOrbitters = function () {
+//   for (let i = 0; i < this.orb.length; i++) {
+//     this.orb[i].run(this.loc.x, this.loc.y);
+//   }
+//};
 
 Planet.prototype.checkEdges = function () {
   if (this.loc.x > canvas.width) this.vel.x = -this.vel.x;
