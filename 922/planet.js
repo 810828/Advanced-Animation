@@ -1,6 +1,6 @@
 function Planet(x, y, d) {
   this.loc = new JSVector(x, y);
-  this.vel = new JSVector(1, 0);
+  this.vel = new JSVector(Math.random() * 4 - 4, Math.random() * 4 - 4);
   this.d = d;
   this.orb = [];
   this.o_number = 1;

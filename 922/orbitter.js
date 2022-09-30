@@ -1,7 +1,8 @@
 function Orbitter(x, y, d) {
   this.vel = new JSVector(0, 0);
   this.d = d;
-  this.orbRad = 50;
+  this.angle = 0;
+  // this.orbRad = 50;
 }
 
 Orbitter.prototype.run = function (x, y) {
@@ -12,13 +13,14 @@ Orbitter.prototype.run = function (x, y) {
 Orbitter.prototype.render = function (x, y) {
   this.p_loc = new JSVector(x, y);
   this.loc = new JSVector(x, y);
+  this.angle = this.angle + 0.1;
+  // console.log(this.angle);
 
   // create the circle path
   context.save();
   context.beginPath(); // clear old path
   context.translate(this.p_loc.x, this.p_loc.y);
-  context.rotate(20);
-  // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc
+  context.rotate(this.angle);
   context.arc(0 + 20, 0, this.d, 0, 2 * Math.PI);
   context.strokeStyle = "black"; // color to fill
   context.fillStyle = "blue"; // color to stroke
@@ -32,5 +34,9 @@ Orbitter.prototype.render = function (x, y) {
 };
 
 Orbitter.prototype.update = function () {
+  // this.acc = new JSVector.subGetNew(this.p_loc, this.loc);
+  // this.acc.normalize();
+  // this.acc.multiply(0.1);
+  // this.vel.add(this.acc);
   this.loc.add(this.vel);
 };
