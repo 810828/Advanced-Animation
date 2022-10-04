@@ -23,17 +23,17 @@ Planet.prototype.render = function () {
 
   ctx.save();
   ctx.translate(this.loc.x, this.loc.y);
-  ctx.rotate(-Math.PI/2);
+  ctx.rotate(-Math.PI / 2);
   ctx.beginPath();
   ctx.moveTo(8, 0); // Begin first sub-path
   ctx.lineTo(-5, -5);
   ctx.lineTo(-5, 5);
-  ctx.closePath()
+  ctx.closePath();
   ctx.stroke();
 
   //+++++++++++++++++++++++++++++++++++++++++++++
-  for(let i = 0; i < this.orbs, i++){
-    
+  for (let i = 0; i < this.o_number; i++) {
+    this.orb[i].run();
   }
 
   ctx.restore();
