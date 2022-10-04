@@ -1,17 +1,20 @@
-function Orbitter(x, y, d) {
+function Orbiter(planet, orbRad, inAgle, angleV) {
   this.vel = new JSVector(0, 0);
-  this.d = d;
+  this.d = orbRad;
+  this.i = i;
+
   this.angle = 0;
-  this.angleVelocity = 0.1;
+
+  this.angleVelocity = 0.05;
 }
 
-Orbitter.prototype.run = function (x, y) {
+Orbiter.prototype.run = function (x, y) {
   this.render(x, y);
   this.update();
 };
 
-Orbitter.prototype.render = function (x, y) {
-  this.p_loc = new JSVector(x, y);
+Orbiter.prototype.render = function (x, y) {
+  this.p_loc = new JSVector(0, 0);
   this.loc = new JSVector(x, y);
   this.angle += this.angleVelocity;
 
@@ -32,7 +35,7 @@ Orbitter.prototype.render = function (x, y) {
   context.stroke(); // render the stroke
 };
 
-Orbitter.prototype.update = function () {
+Orbiter.prototype.update = function () {
   // this.acc = new JSVector.subGetNew(this.p_loc, this.loc);
   // this.acc.normalize();
   // this.acc.multiply(0.1);

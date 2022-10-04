@@ -5,9 +5,12 @@ function Planet(x, y, d) {
   this.orb = [];
   this.o_number = 3;
 
+  let a = (Math.PI * 2) / this.o_number;
+
   for (let i = 0; i < this.o_number; i++) {
     // loads a new orbitter
-    this.orb[i] = new Orbitter(this.loc.x, this.loc.y, 5);
+
+    this.orb[i] = new Orbiter(this, 20, i * a, 0.05);
   }
 }
 
