@@ -17,7 +17,6 @@ function init() {
 
 // every animation cycle
 function animate() {
-  // erase the HTMLCanvasElement
   context.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < planet.length; i++) {
     planet[i].run();

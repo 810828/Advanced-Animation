@@ -14,7 +14,6 @@ function Planet(x, y, d) {
 Planet.prototype.run = function () {
   this.render();
   this.update();
-  //this.makeOrbitters();
   this.checkEdges();
 };
 
@@ -44,12 +43,6 @@ Planet.prototype.render = function () {
 Planet.prototype.update = function () {
   this.loc.add(this.vel);
 };
-
-// Planet.prototype.makeOrbitters = function () {
-//   for (let i = 0; i < this.orb.length; i++) {
-//     this.orb[i].run(this.loc.x, this.loc.y);
-//   }
-//};
 
 Planet.prototype.checkEdges = function () {
   if (this.loc.x > canvas.width) this.vel.x = -this.vel.x;

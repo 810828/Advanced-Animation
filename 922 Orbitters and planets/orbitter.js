@@ -1,9 +1,8 @@
-function Orbitter( x, y, d) {
+function Orbitter(x, y, d) {
   this.vel = new JSVector(0, 0);
   this.d = d;
   this.angle = 0;
- this.angleVelocity = 0.1;
-  // this.orbRad = 50;
+  this.angleVelocity = 0.1;
 }
 
 Orbitter.prototype.run = function (x, y) {
