@@ -57,8 +57,6 @@ function World() {
 // run the world in animation
 World.prototype.run = function () {
   let ctx = this.ctxMain;
-  ctx.clear();
-
   ctx.save();
   ctx.beginPath();
   ctx.translate(-this.cnvMainLoc.x, -this.cnvMainLoc.y);
@@ -71,6 +69,7 @@ World.prototype.run = function () {
 
   // Step Two:  Move cnvMain in the world and run movers  ########################################################
   //  Clear the rectangle in the main Canvas
+  ctx.clearRect(0, 0, -1500, 1500);
 
   //  move the main canvas inside of the world
 
@@ -86,6 +85,7 @@ World.prototype.run = function () {
 
   //  restore the context
   ctx.restore();
+
   // Step Three:  Draw the mainCanv and axes in the miniCanv ########################################################
   //    scale cnvMini to contain the entire world
 
