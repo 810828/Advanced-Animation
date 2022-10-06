@@ -1,11 +1,10 @@
-function Orbiter(planet, orbRad, inAgle, angleV) {
+function Orbiter(planet, oR, inAgle, angleV) {
   this.vel = new JSVector(0, 0);
-  this.d = orbRad;
-  this.i = i;
-
-  this.angle = 0;
-
-  this.angleVelocity = 0.05;
+  this.orbRad = oR;
+  this.planet = planet;
+  this.d = 10;
+  this.inAgle = inAgle;
+  this.angleVelocity = angleV;
 }
 
 Orbiter.prototype.run = function (x, y) {
@@ -16,22 +15,21 @@ Orbiter.prototype.run = function (x, y) {
 Orbiter.prototype.render = function (x, y) {
   this.p_loc = new JSVector(0, 0);
   this.loc = new JSVector(x, y);
-  this.angle += this.angleVelocity;
+  this.inAgle += this.angleVelocity;
 
   // create the circle path
   context.save();
   context.beginPath(); // clear old path
   context.translate(this.p_loc.x, this.p_loc.y);
-  context.rotate(this.angle);
-  context.arc(0 + 20, 0, this.d, 0, 2 * Math.PI);
+  context.rotate(this.inAgle);
+  context.arc(0 + this.orbRad, 0, this.d, 0, 2 * Math.PI);
   context.strokeStyle = "black"; // color to fill
   context.fillStyle = "blue"; // color to stroke
   context.fill(); // render the fill
 
+  context.moveTo(0, 0);
+  context.lineTo(this.loc.x + this.orbRad, this.loc.y);
   context.restore();
-
-  context.lineTo(this.loc.x, this.loc.y);
-  context.lineTo(this.p_loc.x, this.p_loc.y);
   context.stroke(); // render the stroke
 };
 
