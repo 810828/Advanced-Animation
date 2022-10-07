@@ -17,8 +17,8 @@ function World() {
   this.loadMovers(5);
 
   //Step 1::reduce world to fit inside of mini Canvas
-  this.scaleX = 10;
-  this.scaleY = 10;
+  // this.scaleX = ??;
+  // this.scaleY = ??;
 
   this.cnvMainLoc = new JSVector(0, 0);
   // add an event handler such that the a, s, w, d keys

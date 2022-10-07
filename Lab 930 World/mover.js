@@ -28,7 +28,7 @@ Mover.prototype.render = function () {
   ctxMain.save();
   ctxMain.beginPath();
   ctxMain.arc(this.loc.x, this.loc.y, this.diam, 0, 2 * Math.PI);
-  ctxMain.strokeStyle = "black"; // color to fill
+  ctxMain.strokeStyle = "black";
   ctxMain.fill();
   ctxMain.stroke();
   ctxMain.restore();
