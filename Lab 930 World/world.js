@@ -80,7 +80,6 @@ World.prototype.run = function () {
   //  move the main canvas inside of the world
 
   //  scale the world to fit into the miniCanvas
-  this.ctxMini.scale(this.scaleX, this.scaleY);
 
   //  center the world inside of the miniCanvas
 
