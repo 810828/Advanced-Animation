@@ -82,6 +82,7 @@ World.prototype.run = function () {
   //  scale the world to fit into the miniCanvas
 
   //  center the world inside of the miniCanvas
+  // this.ctxMini.translate(500, 500);
 
   //  run the movers in both canvas
 
@@ -91,6 +92,15 @@ World.prototype.run = function () {
 
   //  restore the context
   this.ctxMain.restore();
+
+  this.ctxMain.save();
+  this.ctxMain.beginPath();
+  this.ctxMini.scale(5, 5);
+  this.ctxMini.moveTo(100, 100);
+  this.ctxMini.lineTo(200, 200);
+  this.ctxMain.strokeStyle = "blue";
+  this.ctxMain.stroke();
+  this.ctxMini.restore();
 
   // Step Three:  Draw the mainCanv and axes in the miniCanv ########################################################
   //    scale cnvMini to contain the entire world
