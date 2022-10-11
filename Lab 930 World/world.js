@@ -15,6 +15,7 @@ function World() {
 
   this.movers = [];
   this.loadMovers(5);
+  // scale factor 1/10
 
   //Step 1::reduce world to fit inside of mini Canvas
   // this.scaleX = ??;
@@ -56,8 +57,16 @@ function World() {
 
 // run the world in animation
 World.prototype.run = function () {
+  this.ctxMain.clearRect(
+    this.dims.left,
+    this.dims.top,
+    this.totalWidth,
+    this.totalHeight
+  );
+
   this.ctxMain.save();
   this.ctxMain.beginPath();
+
   this.ctxMain.translate(-this.cnvMainLoc.x, -this.cnvMainLoc.y);
   this.ctxMain.moveTo(0, this.dims.top); // draw the y axis
   this.ctxMain.lineTo(0, this.dims.bottom); // x = 0
@@ -65,14 +74,29 @@ World.prototype.run = function () {
   this.ctxMain.lineTo(this.dims.right, 0);
   this.totalWidth = -this.dims.left + this.dims.right;
   this.totalHeight = -this.dims.top + this.dims.bottom;
-  this.ctxMain.clearRect(
+
+  this.ctxMain.strokeStyle = "blue";
+  this.ctxMain.stroke();
+
+  this.ctxMini.save();
+  this.ctxMini.beginPath();
+
+  this.ctxMini.scale(0.1, 0.1);
+  this.ctxMini.translate(-this.cnvMainLoc.x, -this.cnvMainLoc.y);
+  this.ctxMini.moveTo(0, this.dims.top); // draw the y axis
+  this.ctxMini.lineTo(0, this.dims.bottom); // x = 0
+  this.ctxMini.moveTo(this.dims.left, 0);
+  this.ctxMini.lineTo(this.dims.right, 0);
+  this.ctxMini.strokeStyle = "blue";
+  this.ctxMini.stroke();
+  this.ctxMini.clearRect(
     this.dims.left,
     this.dims.top,
     this.totalWidth,
     this.totalHeight
   );
-  this.ctxMain.strokeStyle = "blue";
-  this.ctxMain.stroke();
+
+  this.ctxMini.restore();
 
   // Step Two:  Move cnvMain in the world and run movers  ########################################################
   //  Clear the rectangle in the main Canvas
