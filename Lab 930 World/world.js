@@ -12,6 +12,14 @@ function World() {
     width: 4000,
     height: 3000,
   };
+  this.miniDims = {
+    top: this.dims.top * 0.1,
+    left: this.dims.left * 0.1,
+    bottom: this.dims.bottom * 0.1,
+    right: this.dims.right * 0.1,
+    width: this.dims.width * 0.1,
+    height: this.dims.height * 0.1,
+  };
 
   this.movers = [];
   this.loadMovers(5);
@@ -24,6 +32,11 @@ function World() {
   this.cnvMainLoc = new JSVector(0, 0);
   // add an event handler such that the a, s, w, d keys
   // will reposition the canvas within the world.
+  document.addEventListener("mousemove", logKey);
+  function logKey(e) {
+    console.log(e.clientX);
+  }
+
   window.addEventListener(
     "keypress",
     function (event) {
@@ -78,6 +91,7 @@ World.prototype.run = function () {
   this.ctxMain.strokeStyle = "blue";
   this.ctxMain.stroke();
 
+  //****************************
   this.ctxMini.save();
   this.ctxMini.beginPath();
   this.ctxMini.clearRect(
@@ -86,15 +100,24 @@ World.prototype.run = function () {
     this.totalWidth,
     this.totalHeight
   );
-  this.ctxMini.scale(0.1, 0.1);
-  this.ctxMini.translate(-this.cnvMainLoc.x * 10, -this.cnvMainLoc.y * 10);
+  this.ctxMini.translate(200, 150);
   this.ctxMini.moveTo(0, this.dims.top);
   this.ctxMini.lineTo(0, this.dims.bottom);
   this.ctxMini.moveTo(this.dims.left, 0);
   this.ctxMini.lineTo(this.dims.right, 0);
   this.ctxMini.strokeStyle = "blue";
   this.ctxMini.stroke();
-  this.ctxMini.restore();
+
+  this.ctxMini.scale(0.1, 0.1);
+  this.ctxMini.translate(this.cnvMainLoc.x, this.cnvMainLoc.y);
+  this.ctxMini.lineWidth = 20;
+  this.ctxMini.moveTo(0, 0);
+  this.ctxMini.lineTo(0, 600);
+  this.ctxMini.lineTo(800, 600);
+  this.ctxMini.lineTo(800, 0);
+  this.ctxMini.closePath();
+  this.ctxMini.strokeStyle = "black";
+  this.ctxMini.stroke();
 
   // Step Two:  Move cnvMain in the world and run movers  ########################################################
   //  Clear the rectangle in the main Canvas
@@ -113,6 +136,8 @@ World.prototype.run = function () {
   }
 
   //  restore the context
+  this.ctxMini.restore();
+
   this.ctxMain.restore();
 
   // this.ctxMain.save();
