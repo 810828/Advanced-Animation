@@ -80,22 +80,20 @@ World.prototype.run = function () {
 
   this.ctxMini.save();
   this.ctxMini.beginPath();
-
-  this.ctxMini.scale(0.1, 0.1);
-  this.ctxMini.translate(-this.cnvMainLoc.x, -this.cnvMainLoc.y);
-  this.ctxMini.moveTo(0, this.dims.top); // draw the y axis
-  this.ctxMini.lineTo(0, this.dims.bottom); // x = 0
-  this.ctxMini.moveTo(this.dims.left, 0);
-  this.ctxMini.lineTo(this.dims.right, 0);
-  this.ctxMini.strokeStyle = "blue";
-  this.ctxMini.stroke();
   this.ctxMini.clearRect(
     this.dims.left,
     this.dims.top,
     this.totalWidth,
     this.totalHeight
   );
-
+  this.ctxMini.scale(0.1, 0.1);
+  this.ctxMini.translate(-this.cnvMainLoc.x * 10, -this.cnvMainLoc.y * 10);
+  this.ctxMini.moveTo(0, this.dims.top);
+  this.ctxMini.lineTo(0, this.dims.bottom);
+  this.ctxMini.moveTo(this.dims.left, 0);
+  this.ctxMini.lineTo(this.dims.right, 0);
+  this.ctxMini.strokeStyle = "blue";
+  this.ctxMini.stroke();
   this.ctxMini.restore();
 
   // Step Two:  Move cnvMain in the world and run movers  ########################################################
@@ -117,14 +115,14 @@ World.prototype.run = function () {
   //  restore the context
   this.ctxMain.restore();
 
-  this.ctxMain.save();
-  this.ctxMain.beginPath();
-  this.ctxMini.scale(5, 5);
-  this.ctxMini.moveTo(100, 100);
-  this.ctxMini.lineTo(200, 200);
-  this.ctxMain.strokeStyle = "blue";
-  this.ctxMain.stroke();
-  this.ctxMini.restore();
+  // this.ctxMain.save();
+  // this.ctxMain.beginPath();
+  // this.ctxMini.scale(5, 5);
+  // this.ctxMini.moveTo(100, 100);
+  // this.ctxMini.lineTo(200, 200);
+  // this.ctxMain.strokeStyle = "blue";
+  // this.ctxMain.stroke();
+  // this.ctxMini.restore();
 
   // Step Three:  Draw the mainCanv and axes in the miniCanv ########################################################
   //    scale cnvMini to contain the entire world
