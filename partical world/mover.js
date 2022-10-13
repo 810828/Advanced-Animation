@@ -1,12 +1,17 @@
-function Mover() {
+function Mover(x, y) {
   //mover properties
-  this.loc = new JSVector(100, 100);
-  this.vel = new JSVector(Math.random() * 4 - 4, Math.random() * 4 - 4);
+  this.loc = new JSVector(x, y);
+  this.vel = new JSVector(
+    Math.random() * (2 - -2) + -2,
+    Math.random() * (2 - -2) + -2
+  );
   this.diam = 15;
   this.isDead = false;
-  this.lifespan = 0;
+  this.lifespan = 150;
+  this.lifespan = Math.random() * (200 - 100) + 100;
+  this.count = 0;
   this.kidCount = 0;
-  this.kids = [];
+  this.maxMovers = 500;
 } //++++++++++++++++++++++++++++++++ end mover constructor
 
 //++++++++++++++++++++++++++++++++ mover methods
@@ -18,11 +23,20 @@ Mover.prototype.run = function () {
 
 Mover.prototype.update = function () {
   this.loc.add(this.vel);
-  this.lifespan++;
-  if(this.lifespan >= 5) {
-    for(let i = 0; i < )
-    this.lifespan = 0;
-
+  if (--this.lifespan <= 0) {
+    this.isDead = true;
+  }
+  if (
+    ++this.count > Math.random() * (200 - 60) + 60 &&
+    world.movers.length < this.maxMovers
+  ) {
+    // adds a new mover when the count reachers the random number and when there are less then the maxMovers
+    world.movers.push(new Mover(this.loc.x, this.loc.y));
+    this.kidCount++;
+    this.count = 0;
+  }
+  if (this.kidCount >= 2) {
+    this.isDead = true;
   }
 };
 

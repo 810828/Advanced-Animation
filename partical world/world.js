@@ -22,7 +22,7 @@ function World() {
   };
 
   this.movers = [];
-  this.loadMovers(5);
+  this.loadMovers(10);
   // scale factor 1/10
 
   //Step 1::reduce world to fit inside of mini Canvas
@@ -75,6 +75,16 @@ World.prototype.run = function () {
     this.totalHeight
   );
   this.ctxMain.translate(-this.cnvMainLoc.x, -this.cnvMainLoc.y);
+
+  //! world border
+  this.ctxMain.moveTo(this.dims.left, this.dims.top);
+  this.ctxMain.lineTo(this.dims.right, this.dims.top);
+  this.ctxMain.lineTo(this.dims.right, this.dims.bottom);
+  this.ctxMain.lineTo(this.dims.left, this.dims.bottom);
+  this.ctxMain.closePath();
+
+  //! end of world border
+
   this.ctxMain.moveTo(0, this.dims.top); // draw the y axis
   this.ctxMain.lineTo(0, this.dims.bottom); // x = 0
   this.ctxMain.moveTo(this.dims.left, 0);
@@ -144,12 +154,22 @@ World.prototype.run = function () {
 
   //    this.ctxMain.restore();
   //    this.ctxMini.restore();
+
+  this.checkDead();
+};
+
+World.prototype.checkDead = function () {
+  for (let i = 0; i < this.movers.length; i++) {
+    if (this.movers[i].isDead) {
+      this.movers.splice(i, 1);
+    }
+  }
 };
 
 //Load mover array
 World.prototype.loadMovers = function (n) {
   for (let i = 0; i < n; i++) {
-    this.movers[i] = new Mover();
+    this.movers[i] = new Mover(100, 500);
   }
 };
 
