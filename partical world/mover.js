@@ -11,7 +11,7 @@ function Mover(x, y) {
   this.lifespan = Math.random() * (200 - 100) + 100;
   this.count = 0;
   this.kidCount = 0;
-  this.maxMovers = 500;
+  this.maxMovers = 10;
 } //++++++++++++++++++++++++++++++++ end mover constructor
 
 //++++++++++++++++++++++++++++++++ mover methods
@@ -56,6 +56,15 @@ Mover.prototype.render = function () {
   ctxMain.fill();
   ctxMain.stroke();
   ctxMain.restore();
+
+  let ctxMini = world.ctxMini;
+  ctxMini.save();
+  ctxMini.beginPath();
+  ctxMini.arc(this.loc.x, this.loc.y, this.diam, 0, 2 * Math.PI);
+  ctxMini.strokeStyle = "black";
+  ctxMini.fill();
+  ctxMini.stroke();
+  ctxMini.restore();
 
   //  render balls in world
   //  render balls in mini map

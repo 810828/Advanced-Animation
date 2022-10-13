@@ -89,8 +89,6 @@ World.prototype.run = function () {
   this.ctxMain.lineTo(0, this.dims.bottom); // x = 0
   this.ctxMain.moveTo(this.dims.left, 0);
   this.ctxMain.lineTo(this.dims.right, 0);
-  this.totalWidth = -this.dims.left + this.dims.right;
-  this.totalHeight = -this.dims.top + this.dims.bottom;
 
   this.ctxMain.strokeStyle = "blue";
   this.ctxMain.stroke();
@@ -98,6 +96,8 @@ World.prototype.run = function () {
   //****************************
   this.ctxMini.save();
   this.ctxMini.beginPath();
+  this.totalWidth = -this.dims.left + this.dims.right; // gets the total width of the main canvas
+  this.totalHeight = -this.dims.top + this.dims.bottom; // gets the total height of the main canvas
   this.ctxMini.clearRect(
     this.dims.left,
     this.dims.top,
