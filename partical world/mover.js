@@ -11,7 +11,7 @@ function Mover(x, y) {
   this.lifespan = Math.random() * (200 - 100) + 100;
   this.count = 0;
   this.kidCount = 0;
-  this.maxMovers = 10;
+  this.maxMovers = 100;
 } //++++++++++++++++++++++++++++++++ end mover constructor
 
 //++++++++++++++++++++++++++++++++ mover methods
