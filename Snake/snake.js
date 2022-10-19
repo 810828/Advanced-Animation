@@ -12,10 +12,7 @@ function Snake(location, numSegs, segLength) {
 
 Snake.prototype.loadSegments = function () {
   for (let i = 1; i < this.segLength; i++) {
-    this.segments[i] = new JSVector(
-      Math.cos(Math.PI / 6) * this.segLength + this.loc.x,
-      Math.sin(Math.PI / 6) * this.segLength + this.loc.y
-    );
+    this.segments[i] = new JSVector(this.loc.x, this.loc.y);
   }
 };
 
@@ -30,9 +27,9 @@ Snake.prototype.update = function () {
   for (let i = 1; i < this.segLength; i++) {
     let diff = JSVector.subGetNew(this.loc, this.segments[i]);
     let angle = diff.getDirection();
-
-    this.segments[i].setMagnitude(this.segLength);
     this.segments[i].setDirection(angle);
+    this.segments[i].x = Math.cos(angle) * this.segLength + this.loc.x;
+    this.segments[i].y = Math.sin(angle) * this.segLength + this.loc.y;
 
     world.ctx.save();
     world.ctx.beginPath();
