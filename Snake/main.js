@@ -11,7 +11,7 @@ function init() {
 //  animation loop called 60 fps
 function animate() {
   world.ctx.fillStyle = "white";
-  world.ctx.globalAlpha = 1.0;
+  world.ctx.globalAlpha = 0.2;
   world.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   world.run(); // run the world
   requestAnimationFrame(animate);

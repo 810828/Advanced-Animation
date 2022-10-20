@@ -6,8 +6,9 @@ function Snake(location, numSegs, segLength) {
   this.numSegs = numSegs;
   this.segLength = segLength;
   this.diff;
+  this.diam;
   this.segments = [];
-  this.vel = new JSVector(Math.random() * 4 - 3, Math.random() * 4 - 3);
+  this.vel = new JSVector(Math.random() * 5 - 5, Math.random() * 5 - 5);
 
   this.loadSegments();
 }
@@ -15,7 +16,6 @@ function Snake(location, numSegs, segLength) {
 Snake.prototype.loadSegments = function () {
   for (let i = 1; i < this.numSegs; i++) {
     let angle = this.vel.getDirection();
-    console.log(this.vel);
     this.segments[i] = new JSVector(
       Math.cos(angle + Math.PI) * this.segLength * (i + 1) + this.loc.x,
       Math.sin(angle + Math.PI) * this.segLength * (i + 1) + this.loc.y
@@ -38,22 +38,14 @@ Snake.prototype.update = function () {
     this.diff.add(this.segments[i - 1]);
     this.segments[i] = this.diff;
 
-    // let angle = this.diff.getDirection();
-    // this.segments[i].setDirection(angle);
-    // console.log(this.segments[i].x);
-
-    // this.segments[i].add(diff);
-    // this.segments[i].x = Math.cos(angle) * this.segLength + this.loc.x;
-    // this.segments[i].y = Math.sin(angle) * this.segLength + this.loc.y;
-
-    world.ctx.save();
-    world.ctx.beginPath();
-    world.ctx.moveTo(this.loc.x, this.loc.y);
-    world.ctx.lineTo(this.segments[i].x, this.segments[i].y);
-    world.ctx.strokeStyle = "black";
-    world.ctx.fill();
-    world.ctx.stroke();
-    world.ctx.restore();
+    // world.ctx.save();
+    // world.ctx.beginPath();
+    // world.ctx.moveTo(this.segments[i - 1].x, this.segments[i - 1].y);
+    // world.ctx.lineTo(this.segments[i].x, this.segments[i].y);
+    // world.ctx.strokeStyle = "black";
+    // world.ctx.fill();
+    // world.ctx.stroke();
+    // world.ctx.restore();
   }
 };
 
@@ -61,18 +53,29 @@ Snake.prototype.render = function () {
   world.ctx.save();
   world.ctx.beginPath();
   world.ctx.arc(this.loc.x, this.loc.y, 15, 0, 2 * Math.PI);
-  world.ctx.strokeStyle = "black";
+  // world.ctx.strokeStyle = "black";
+  world.ctx.fillStyle = "blue"; // color to stroke
   world.ctx.fill();
   world.ctx.stroke();
   world.ctx.restore();
 
   for (let i = 1; i < this.numSegs; i++) {
+    if (i <= 14) {
+      this.diam = 15;
+    }
     world.ctx.save();
     world.ctx.beginPath();
-    world.ctx.arc(this.segments[i].x, this.segments[i].y, 15, 0, 2 * Math.PI);
-    world.ctx.strokeStyle = "blue";
+    world.ctx.arc(
+      this.segments[i].x,
+      this.segments[i].y,
+      this.diam,
+      0,
+      2 * Math.PI
+    );
+    // world.ctx.strokeStyle = "blue";
+    world.ctx.fillStyle = "blue"; // color to stroke
     world.ctx.fill();
-    world.ctx.stroke();
+    // world.ctx.stroke();
     world.ctx.restore();
   }
 

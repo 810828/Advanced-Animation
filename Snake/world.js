@@ -7,7 +7,7 @@ function World() {
       Math.random() * this.canvas.width,
       Math.random() * this.canvas.height
     );
-    snakes[i] = new Snake(loc, 10, 30);
+    snakes[i] = new Snake(loc, 50, 20);
   }
 }
 
