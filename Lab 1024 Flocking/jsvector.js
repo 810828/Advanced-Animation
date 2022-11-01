@@ -97,7 +97,10 @@ JSVector.prototype.distance = function (v2) {
 };
 
 // Return the square of the distance between this vector and another one
-JSVector.prototype.distanceSquared = function (v2) {};
+JSVector.prototype.distanceSquared = function (v2) {
+  let v = JSVector.subGetNew(this, v2);
+  return v.x * v.x + v.y * v.y;
+};
 
 // Rotate this vector by some number of radians
 // using the rotation matrix |  cos   -sin  |
