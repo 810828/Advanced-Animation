@@ -31,6 +31,8 @@ Vehicle.prototype.flock = function (vehicles) {
   let ali = this.align(vehicles);
   let coh = this.cohesion(vehicles);
   //  set multiples via sliders
+  this.maxSpeed = document.getElementById("slider2").value; // %%%%%%%%%%%%%%%%%
+  this.maxForce = document.getElementById("slider1").value; // %%%%%%%%%%%%%%%%%
   let sepMult = document.getElementById("slider3").value; // %%%%%%%%%%%%%%%%%%
   let aliMult = document.getElementById("slider4").value; // %%%%%%%%%%%%%%%%%%
   let cohMult = document.getElementById("slider5").value; // %%%%%%%%%%%%%%%%%%
@@ -133,8 +135,10 @@ Vehicle.prototype.seek = function (target) {
 //+++++++++++++++++++++++++++++++++  Flocking functions
 
 Vehicle.prototype.update = function () {
+  this.acc.limit(this.maxForce);
   this.vel.add(this.acc);
-  this.vel.limit(1);
+  this.acc = new JSVector();
+  this.vel.limit(this.maxSpeed);
   this.loc.add(this.vel);
 };
 
