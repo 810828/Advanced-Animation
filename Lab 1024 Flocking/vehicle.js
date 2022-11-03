@@ -66,8 +66,7 @@ Vehicle.prototype.separate = function (v) {
     }
 
     if (count > 0) {
-      sum.normalize();
-      sum.multiply(this.maxSpeed);
+      sum.setMagnitude(this.maxSpeed);
       steer = JSVector.subGetNew(sum, this.vel);
       steer.limit(this.maxForce);
       separationForce = steer;
